@@ -5,6 +5,7 @@ import com.coocaa.po.User;
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id) throws Exception;
 
+
     void insert(User record) throws Exception;
 
     int insertSelective(User record) throws Exception;
