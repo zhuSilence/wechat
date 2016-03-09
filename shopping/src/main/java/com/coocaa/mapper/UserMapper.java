@@ -2,6 +2,7 @@ package com.coocaa.mapper;
 
 import com.coocaa.po.User;
 
+
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id) throws Exception;
 
