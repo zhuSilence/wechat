@@ -11,6 +11,9 @@
 <html>
 <head>
     <title>login</title>
+    <link href="/static/plugins/swiper/swiper-3.3.1.min.css" rel="stylesheet"/>
+    <script src="/static/jquery-2.1.1.min.js"></script>
+    <script src="/static/plugins/swiper/swiper-3.3.1.min.js"></script>
 </head>
 <body>
 fertertkkkkkhjjhjjhhhh
