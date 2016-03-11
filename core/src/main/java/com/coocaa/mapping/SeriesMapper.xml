@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coocaa.mapper.SeriesMapper" >
+  <resultMap id="BaseResultMap" type="com.coocaa.po.Series" >
+    <id column="goods_type" property="goodsType" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    goods_type, name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from series
+    where goods_type = #{goodsType,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from series
+    where goods_type = #{goodsType,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.coocaa.po.Series" >
+    insert into series (goods_type, name)
+    values (#{goodsType,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.coocaa.po.Series" >
+    insert into series
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsType != null" >
+        goods_type,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsType != null" >
+        #{goodsType,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.coocaa.po.Series" >
+    update series
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where goods_type = #{goodsType,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.coocaa.po.Series" >
+    update series
+    set name = #{name,jdbcType=VARCHAR}
+    where goods_type = #{goodsType,jdbcType=INTEGER}
+  </update>
+</mapper>

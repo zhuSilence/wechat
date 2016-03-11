@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coocaa.mapper.OrderTableMapper" >
+  <resultMap id="BaseResultMap" type="com.coocaa.po.OrderTable" >
+    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="order_number" property="orderNumber" jdbcType="CHAR" />
+    <result column="address_id" property="addressId" jdbcType="INTEGER" />
+    <result column="order_statue" property="orderStatue" jdbcType="INTEGER" />
+    <result column="order_details" property="orderDetails" jdbcType="INTEGER" />
+    <result column="order_money" property="orderMoney" jdbcType="REAL" />
+    <result column="freight" property="freight" jdbcType="REAL" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_id, order_number, address_id, order_statue, order_details, order_money, freight,
+    remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from order_table
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_table
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.coocaa.po.OrderTable" >
+    insert into order_table (order_id, order_number, address_id,
+    order_statue, order_details, order_money,
+    freight, remark)
+    values (#{orderId,jdbcType=INTEGER}, #{orderNumber,jdbcType=CHAR}, #{addressId,jdbcType=INTEGER},
+    #{orderStatue,jdbcType=INTEGER}, #{orderDetails,jdbcType=INTEGER}, #{orderMoney,jdbcType=REAL},
+    #{freight,jdbcType=REAL}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.coocaa.po.OrderTable" >
+    insert into order_table
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="orderNumber != null" >
+        order_number,
+      </if>
+      <if test="addressId != null" >
+        address_id,
+      </if>
+      <if test="orderStatue != null" >
+        order_statue,
+      </if>
+      <if test="orderDetails != null" >
+        order_details,
+      </if>
+      <if test="orderMoney != null" >
+        order_money,
+      </if>
+      <if test="freight != null" >
+        freight,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumber != null" >
+        #{orderNumber,jdbcType=CHAR},
+      </if>
+      <if test="addressId != null" >
+        #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatue != null" >
+        #{orderStatue,jdbcType=INTEGER},
+      </if>
+      <if test="orderDetails != null" >
+        #{orderDetails,jdbcType=INTEGER},
+      </if>
+      <if test="orderMoney != null" >
+        #{orderMoney,jdbcType=REAL},
+      </if>
+      <if test="freight != null" >
+        #{freight,jdbcType=REAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.coocaa.po.OrderTable" >
+    update order_table
+    <set >
+      <if test="orderNumber != null" >
+        order_number = #{orderNumber,jdbcType=CHAR},
+      </if>
+      <if test="addressId != null" >
+        address_id = #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatue != null" >
+        order_statue = #{orderStatue,jdbcType=INTEGER},
+      </if>
+      <if test="orderDetails != null" >
+        order_details = #{orderDetails,jdbcType=INTEGER},
+      </if>
+      <if test="orderMoney != null" >
+        order_money = #{orderMoney,jdbcType=REAL},
+      </if>
+      <if test="freight != null" >
+        freight = #{freight,jdbcType=REAL},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.coocaa.po.OrderTable" >
+    update order_table
+    set order_number = #{orderNumber,jdbcType=CHAR},
+      address_id = #{addressId,jdbcType=INTEGER},
+      order_statue = #{orderStatue,jdbcType=INTEGER},
+      order_details = #{orderDetails,jdbcType=INTEGER},
+      order_money = #{orderMoney,jdbcType=REAL},
+      freight = #{freight,jdbcType=REAL},
+      remark = #{remark,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+</mapper>

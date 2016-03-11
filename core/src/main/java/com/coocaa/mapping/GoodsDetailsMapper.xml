@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coocaa.mapper.GoodsDetailsMapper" >
+  <resultMap id="BaseResultMap" type="com.coocaa.po.GoodsDetails" >
+    <id column="goods_details_id" property="goodsDetailsId" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="big_url" property="bigUrl" jdbcType="VARCHAR" />
+    <result column="mil_url" property="milUrl" jdbcType="VARCHAR" />
+    <result column="small_url" property="smallUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    goods_details_id, goods_id, big_url, mil_url, small_url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from goods_details
+    where goods_details_id = #{goodsDetailsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from goods_details
+    where goods_details_id = #{goodsDetailsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.coocaa.po.GoodsDetails" >
+    insert into goods_details (goods_details_id, goods_id, big_url,
+    mil_url, small_url)
+    values (#{goodsDetailsId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{bigUrl,jdbcType=VARCHAR},
+    #{milUrl,jdbcType=VARCHAR}, #{smallUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.coocaa.po.GoodsDetails" >
+    insert into goods_details
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsDetailsId != null" >
+        goods_details_id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="bigUrl != null" >
+        big_url,
+      </if>
+      <if test="milUrl != null" >
+        mil_url,
+      </if>
+      <if test="smallUrl != null" >
+        small_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsDetailsId != null" >
+        #{goodsDetailsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="bigUrl != null" >
+        #{bigUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="milUrl != null" >
+        #{milUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="smallUrl != null" >
+        #{smallUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.coocaa.po.GoodsDetails" >
+    update goods_details
+    <set >
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="bigUrl != null" >
+        big_url = #{bigUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="milUrl != null" >
+        mil_url = #{milUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="smallUrl != null" >
+        small_url = #{smallUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where goods_details_id = #{goodsDetailsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.coocaa.po.GoodsDetails" >
+    update goods_details
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      big_url = #{bigUrl,jdbcType=VARCHAR},
+      mil_url = #{milUrl,jdbcType=VARCHAR},
+      small_url = #{smallUrl,jdbcType=VARCHAR}
+    where goods_details_id = #{goodsDetailsId,jdbcType=INTEGER}
+  </update>
+</mapper>
