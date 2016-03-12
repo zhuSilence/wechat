@@ -32,6 +32,6 @@ public class LoginController {
         User user = userService.findUserById(1);
         System.out.println(user.getUsername());
         System.out.println("sssssddddd");
-        return "login";
+        return "index";
     }
 }

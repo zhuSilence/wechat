@@ -13,9 +13,10 @@
 
     <properties>
         <java-version>1.8</java-version>
-        <org.springframework-version>3.2.3.RELEASE</org.springframework-version>
+        <spring.version>3.2.3.RELEASE</spring.version>
         <org.aspectj-version>1.6.10</org.aspectj-version>
         <org.slf4j-version>1.6.6</org.slf4j-version>
+        <freemarker.version>2.3.20</freemarker.version>
     </properties>
 
     <dependencies>
@@ -31,7 +32,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>${org.springframework-version}</version>
+            <version>${spring.version}</version>
             <exclusions>
                 <!-- Exclude Commons Logging in favor of SLF4j -->
                 <exclusion>
@@ -43,12 +44,38 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>${org.springframework-version}</version>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!--@Transactional-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!--RequestMapping ModelAndView-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>${org.springframework-version}</version>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -154,7 +181,11 @@
             <version>5.1.22</version>
         </dependency>
 
-
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>${freemarker.version}</version>
+        </dependency>
 
         <!-- Test -->
         <dependency>

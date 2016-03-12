@@ -45,15 +45,39 @@
         </beans:property>
     </beans:bean>-->
     <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-    <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <!--<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <beans:property name="prefix" value="/WEB-INF/views/" />
         <beans:property name="suffix" value=".jsp" />
-    </beans:bean>
-
-   <!-- <beans:bean id="maxUploadSize" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <beans:property name="maxUploadSize" value="32505856" />&lt;!&ndash; 上传文件大小限制为31M，31*1024*1024 &ndash;&gt;
-        <beans:property name="maxInMemorySize" value="4096" />
     </beans:bean>-->
+    <!--FreeMarkerViewResolver-->
+    <beans:bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <beans:property name="suffix" value=".ftl" />
+        <beans:property name="contentType" value="text/html;charset=UTF-8" />
+        <!-- 此变量值为pageContext.request, 页面使用方法：rc.contextPath -->
+        <beans:property name="requestContextAttribute" value="rc" />
+    </beans:bean>
+    <beans:bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <beans:property name="templateLoaderPath" value="/WEB-INF/views" />
+        <beans:property name="defaultEncoding" value="UTF-8" />
+        <beans:property name="freemarkerSettings"><!-- 设置FreeMarker环境属性 -->
+            <beans:props>
+                <beans:prop key="template_update_delay">5</beans:prop><!--刷新模板的周期，单位为秒 -->
+                <beans:prop key="default_encoding">UTF-8</beans:prop><!--模板的编码格式 -->
+                <beans:prop key="locale">UTF-8</beans:prop><!-- 本地化设置 -->
+                <beans:prop key="datetime_format">yyyy-MM-dd HH:mm:ss</beans:prop>
+                <beans:prop key="time_format">HH:mm:ss</beans:prop>
+                <beans:prop key="number_format">0.####</beans:prop>
+                <beans:prop key="boolean_format">true,false</beans:prop>
+                <beans:prop key="whitespace_stripping">true</beans:prop>
+                <beans:prop key="tag_syntax">auto_detect</beans:prop>
+                <beans:prop key="url_escaping_charset">UTF-8</beans:prop>
+            </beans:props>
+        </beans:property>
+    </beans:bean>
+    <!-- <beans:bean id="maxUploadSize" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+         <beans:property name="maxUploadSize" value="32505856" />&lt;!&ndash; 上传文件大小限制为31M，31*1024*1024 &ndash;&gt;
+         <beans:property name="maxInMemorySize" value="4096" />
+     </beans:bean>-->
 
     <!--配置全局异常处理器
         只要实现了HandlerExceptionResolver接口，就是全局异常处理器

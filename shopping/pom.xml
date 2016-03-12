@@ -10,7 +10,17 @@
     <packaging>war</packaging>
     <name>shopping Maven Webapp</name>
     <url>http://maven.apache.org</url>
+    <properties>
+        <servlet.version>3.1.0</servlet.version>
+    </properties>
+
     <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet.version}</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>com.coocaa.wechat</groupId>
             <artifactId>core</artifactId>
