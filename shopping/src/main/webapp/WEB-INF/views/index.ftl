@@ -53,13 +53,12 @@
 </div>
 <a href="/address/list">跳转联系人</a>
 </body>
+<#include "./footer.ftl"/>
 </html>
 
 <script>
     $(function () {
-
         $(".example2").luara({width: "500", height: "334", interval: 4500, selected: "seleted", deriction: "left"});
-
     });
 </script>
 <script type="text/javascript">
