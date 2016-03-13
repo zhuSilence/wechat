@@ -1,125 +1,136 @@
-/*
-SQLyog Ultimate v11.24 (32 bit)
-MySQL - 5.6.24 : Database - wechat
-*********************************************************************
-*/
+/*==============================================================*/
+/* DBMS name:      MySQL 5.0                                    */
+/* Created on:     2016/3/12 17:02:31                           */
+/*==============================================================*/
 
-/*!40101 SET NAMES utf8 */;
 
-/*!40101 SET SQL_MODE=''*/;
+DROP TABLE IF EXISTS address;
 
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`wechat` /*!40100 DEFAULT CHARACTER SET utf8 */;
+DROP TABLE IF EXISTS goods;
 
-USE `wechat`;
+DROP TABLE IF EXISTS goods_details;
 
-/*Table structure for table `goods` */
+DROP TABLE IF EXISTS order_details;
 
-DROP TABLE IF EXISTS `goods`;
+DROP TABLE IF EXISTS order_table;
 
-CREATE TABLE `goods` (
-  `goods_id` int(11) NOT NULL COMMENT '…Ã∆∑µƒid÷˜º¸',
-  `goods_name` varchar(20) DEFAULT NULL,
-  `goods_type` int(11) DEFAULT NULL,
-  `goods_price` float DEFAULT NULL,
-  `goods_desc` varchar(200) DEFAULT NULL,
-  `goods_color` varchar(20) DEFAULT NULL,
-  `goods_size` varchar(10) DEFAULT NULL,
-  `goods_pictures` int(11) DEFAULT NULL,
-  PRIMARY KEY (`goods_id`),
-  KEY `FK_Reference_5` (`goods_type`),
-  CONSTRAINT `FK_Reference_5` FOREIGN KEY (`goods_type`) REFERENCES `series` (`goods_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS series;
 
-/*Data for the table `goods` */
+DROP TABLE IF EXISTS USER;
 
-/*Table structure for table `goods_details` */
+/*==============================================================*/
+/* Table: address                                               */
+/*==============================================================*/
+CREATE TABLE address
+(
+   address_id           INT NOT NULL AUTO_INCREMENT,
+   province             VARCHAR(20),
+   city                 VARCHAR(20),
+   AREA                 varch`user``series``order_table``goods_details``address``user`ar(20),
+   address              VARCHAR(200),
+   NAME                 VARCHAR(20),
+   phone                VARCHAR(20),
+   post                 CHAR(6),
+   default_add          INT,
+   PRIMARY KEY (address_id)
+);
 
-DROP TABLE IF EXISTS `goods_details`;
+/*==============================================================*/
+/* Table: goods                                                 */
+/*==============================================================*/
+CREATE TABLE goods
+(
+   goods_id             INT NOT NULL AUTO_INCREMENT COMMENT 'ÂïÜÂìÅÁöÑid‰∏ªÈîÆ',
+   goods_name           VARCHAR(20),
+   goods_type           INT,
+   goods_price          FLOAT(10),
+   goods_desc           VARCHAR(200),
+   goods_color          VARCHAR(20),
+   goods_size           VARCHAR(10),
+   goods_pictures       INT,
+   PRIMARY KEY (goods_id)
+);
 
-CREATE TABLE `goods_details` (
-  `goods_details_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `goods_id` int(11) DEFAULT NULL,
-  `big_url` varchar(200) DEFAULT NULL,
-  `mil_url` varchar(200) DEFAULT NULL,
-  `small_url` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`goods_details_id`),
-  KEY `FK_Reference_2` (`goods_id`),
-  CONSTRAINT `FK_Reference_2` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`goods_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*==============================================================*/
+/* Table: goods_details                                         */
+/*==============================================================*/
+CREATE TABLE goods_details
+(
+   goods_details_id     INT NOT NULL AUTO_INCREMENT,
+   goods_id             INT,
+   big_url              VARCHAR(200),
+   mil_url              VARCHAR(200),
+   small_url            VARCHAR(200),
+   PRIMARY KEY (goods_details_id)
+);
 
-/*Data for the table `goods_details` */
+/*==============================================================*/
+/* Table: order_details                                         */
+/*==============================================================*/
+CREATE TABLE order_details
+(
+   order_details_id     INT NOT NULL AUTO_INCREMENT,
+   goods_id             INT COMMENT 'Â§ñÈîÆÔºåÂïÜÂìÅÁöÑidÔºåËé∑ÂèñÂïÜÂìÅÁöÑÊï∞ÊçÆ',
+   buy_numbers          INT COMMENT 'Áªü‰∏ÄÂïÜÂìÅË¥≠‰π∞ÁöÑÊÄªÊï∞Èáè',
+   buy_price            FLOAT(10) COMMENT 'Âêå‰∏ÄÂïÜÂìÅË¥≠‰π∞Ëä±Ë¥π',
+   order_id             INT,
+   PRIMARY KEY (order_details_id)
+);
 
-/*Table structure for table `order_details` */
+/*==============================================================*/
+/* Table: order_table                                           */
+/*==============================================================*/
+CREATE TABLE order_table
+(
+   order_id             INT NOT NULL AUTO_INCREMENT,
+   order_number         CHAR(15) COMMENT 'ÈöèÊó∂Èó¥Ëá™Âä®ÁîüÊàêÁöÑËÆ¢ÂçïÊµÅÊ∞¥Âè∑',
+   address_id           INT COMMENT 'Â§ñÈîÆÔºåÂ∏∏Áî®Êî∂Ë¥ßÂú∞ÂùÄÁöÑid',
+   order_statue         INT COMMENT '0 ÂæÖ‰ªòÊ¨æ
+            1 ÂæÖÊî∂Ë¥ß
+            2  ÂæÖÂèëË¥ß
+            3 Â∑≤ÂÆåÊàê',
+   order_details        INT COMMENT 'ËÆ¢ÂçïËØ¶ÊÉÖÂàóË°®',
+   order_money          FLOAT(10) COMMENT 'ËÆ¢ÂçïÊÄªË¥πÁî®',
+   freight              FLOAT(10),
+   remark               VARCHAR(200),
+   PRIMARY KEY (order_id)
+);
 
-DROP TABLE IF EXISTS `order_details`;
+/*==============================================================*/
+/* Table: series                                                */
+/*==============================================================*/
+CREATE TABLE series
+(
+   goods_type           INT NOT NULL AUTO_INCREMENT,
+   NAME                 VARCHAR(20),
+   PRIMARY KEY (goods_type)
+);
 
-CREATE TABLE `order_details` (
-  `order_details_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `goods_id` int(11) DEFAULT NULL COMMENT 'Õ‚º¸£¨…Ã∆∑µƒid£¨ªÒ»°…Ã∆∑µƒ ˝æ›',
-  `buy_numbers` int(11) DEFAULT NULL COMMENT 'Õ≥“ª…Ã∆∑π∫¬Úµƒ◊‹ ˝¡ø',
-  `buy_price` float DEFAULT NULL COMMENT 'Õ¨“ª…Ã∆∑π∫¬Úª®∑—',
-  `order_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`order_details_id`),
-  KEY `FK_Reference_3` (`goods_id`),
-  KEY `FK_Reference_4` (`order_id`),
-  CONSTRAINT `FK_Reference_3` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`goods_id`),
-  CONSTRAINT `FK_Reference_4` FOREIGN KEY (`order_id`) REFERENCES `order_table` (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*==============================================================*/
+/* Table: user                                                  */
+/*==============================================================*/
+CREATE TABLE USER
+(
+   user_id              INT NOT NULL AUTO_INCREMENT,
+   username             VARCHAR(20),
+   salt                 CHAR(20),
+   phone                VARCHAR(20),
+   email                VARCHAR(30),
+   PRIMARY KEY (user_id)
+);
 
-/*Data for the table `order_details` */
+ALTER TABLE goods ADD CONSTRAINT FK_Reference_5 FOREIGN KEY (goods_type)
+      REFERENCES series (goods_type) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-/*Table structure for table `order_table` */
+ALTER TABLE goods_details ADD CONSTRAINT FK_Reference_2 FOREIGN KEY (goods_id)
+      REFERENCES goods (goods_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-DROP TABLE IF EXISTS `order_table`;
+ALTER TABLE order_details ADD CONSTRAINT FK_Reference_3 FOREIGN KEY (goods_id)
+      REFERENCES goods (goods_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-CREATE TABLE `order_table` (
-  `order_id` int(11) NOT NULL AUTO_INCREMENT,
-  `order_number` char(15) DEFAULT NULL COMMENT 'ÀÊ ±º‰◊‘∂Ø…˙≥…µƒ∂©µ•¡˜ÀÆ∫≈',
-  `address_id` int(11) DEFAULT NULL COMMENT 'Õ‚º¸£¨≥£”√ ’ªıµÿ÷∑µƒid',
-  `order_statue` int(11) DEFAULT NULL COMMENT '0 ¥˝∏∂øÓ\n            1 ¥˝ ’ªı\n            2  ¥˝∑¢ªı\n            3 “—ÕÍ≥…',
-  `order_details` int(11) DEFAULT NULL COMMENT '∂©µ•œÍ«È¡–±Ì',
-  `order_money` float DEFAULT NULL COMMENT '∂©µ•◊‹∑—”√',
-  `freight` float DEFAULT NULL,
-  `remark` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE order_details ADD CONSTRAINT FK_Reference_4 FOREIGN KEY (order_id)
+      REFERENCES order_table (order_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-/*Data for the table `order_table` */
+ALTER TABLE order_table ADD CONSTRAINT FK_Reference_1 FOREIGN KEY (address_id)
+      REFERENCES address (address_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-/*Table structure for table `series` */
-
-DROP TABLE IF EXISTS `series`;
-
-CREATE TABLE `series` (
-  `goods_type` int(11) NOT NULL,
-  `name` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`goods_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `series` */
-
-/*Table structure for table `user` */
-
-DROP TABLE IF EXISTS `user`;
-
-CREATE TABLE `user` (
-  `user_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(20) DEFAULT NULL,
-  `salt` char(20) DEFAULT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `email` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
-/*Data for the table `user` */
-
-insert  into `user`(`user_id`,`username`,`salt`,`phone`,`email`) values (1,'silence','123456','13247163146','zhuxiang@coocaa.com');
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
